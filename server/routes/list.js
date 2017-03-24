@@ -26,6 +26,7 @@ router.get('/', function(req, res){
           console.log("Error making query.");
           res.sendStatus(500);
         } else {
+          console.log("list sent");
           res.send(result.rows);
         }
       });
