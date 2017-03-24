@@ -11,15 +11,15 @@ $(function(){
         console.log("getList called");
         console.log(response);
         var list = response;
-        // for (var i = 0; i < response.length; i++) {
+        for (var i = 0; i < response.length; i++) {
           var $el = $('#listContainer').children().last();
-          $el.append("<div><p>" + list[0].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
+          $el.append("<div><p>" + list[i].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
             // "<div class='listDiv' id='listDiv" + i +
             //           "'<button class='deleteButton' id='deleteButton" + i +
             //           "'>Delete</button><button class='completeButton' id='completeButton" + i +
             //           "'>Complete</button></div"
                     );
-        // }
+        } //end for loop
       }// end success
     }); //end ajax
   } //end getList
