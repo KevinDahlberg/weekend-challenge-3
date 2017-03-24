@@ -57,4 +57,27 @@ router.post('/newItem', function(req, res){
   });
 });// end post function
 
+//DELETE function to delete from search database
+router.delete('/delete/:listId', function(req, res){
+  console.log("in the delete function: ", req.body);
+  var id = req.params.listId;
+pool.connect(function(errorConnectingToDatabase, client, done){
+  if(errorConnectingToDatabase) {
+    console.log("Error connecting to DB");
+    res.send(500);
+  } else {
+    console.log("connected");
+    client.query('DELETE FROM list WHERE "id" = $1', [id], function(queryError, result){
+      done();
+      if(queryError){
+        console.log("Error making query.");
+        res.send(500);
+      } else {
+        res.sendStatus(201);
+      }
+    });
+  }
+});
+});// end delete function
+
 module.exports = router;

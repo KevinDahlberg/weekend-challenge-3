@@ -44,6 +44,15 @@ $(function(){
   $("#listContainer").on('click', ".deleteButton", function(){
     console.log("delete button clicked");
     console.log($(this));
+    var listId = $(this).data('id');
+    $.ajax({
+      type: "DELETE",
+      url: "list/delete/" + listId + "/",
+      success: function (){
+        console.log("in delete list path");
+        getList();
+      }
+    });//end ajax
     });
     //on "click" statement to activate
     //insert for loop to append item to DIV in getList
