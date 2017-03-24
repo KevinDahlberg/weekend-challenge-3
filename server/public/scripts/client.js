@@ -31,7 +31,7 @@ $(function(){
     $.ajax({
       type: "POST",
       url: "list/newItem",
-      data: {title: $('#description').val()},
+      data: {description: $('#description').val()},
       success: function(response) {
         console.log("List item added");
         getList();

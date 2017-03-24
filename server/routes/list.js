@@ -34,4 +34,27 @@ router.get('/', function(req, res){
   });
 });
 
+//post function to add list item to database
+router.post('/newItem', function(req, res){
+  console.log(req.body);
+  var description = req.body.description;
+  pool.connect(function(errorConnectingToDatabase, client, done){
+    if(errorConnectingToDatabase) {
+      console.log("Error connecting to DB");
+      res.send(500);
+    } else {
+      console.log("connected");
+      client.query("INSERT INTO list (description) VALUES ($1);", [description], function(queryError, result){
+        done();
+        if(queryError){
+          console.log("Error making query.");
+          res.send(500);
+        } else {
+          res.sendStatus(201);
+        }
+      });
+    }
+  });
+});// end post function
+
 module.exports = router;
