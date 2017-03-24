@@ -23,11 +23,15 @@ We would recommend you spend some time thinking about how to approach this probl
 Additionally, please include some way to recreate your initial database schema. This can be a .sql file with CREATE TABLE statements or you can create your schema automatically when your app loads.
 
 **Tasks**
-- Hook up all the moving parts
-- MVP
-  - input field in DOM that adds to DB
+- [x]Hook up all the moving parts
+- [x]MVP
+  -  GET when DOM loads that pulls from DB
 - Sketch out functions needed in client.js
-- sketch out ajax in client.js and routes in app.js (create modules)
+  - create task (POST)
+  - each task should have a complete, and delete button (DELETE) (POST)
+  - task background changes upon completion (part of complete button call?)
+  - delete an object pulls it from the DOM and the DB
+- sketch out ajax in client.js and routes in app.js (create modules), alternate between the 2 for testing.
 - Wire frame DOM
 - Add GET, POST, PUT, and DELETE commands to ajax sketches
 - create SQL calls in DB
@@ -40,6 +44,7 @@ HARD MODE
 In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task. Once again, you can interrupt this however you would like.
 
 - create yes/no option
+- edit task (PUT)
 
 PRO MODE
 

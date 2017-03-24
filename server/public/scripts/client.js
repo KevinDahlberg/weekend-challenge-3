@@ -9,18 +9,29 @@ $(function(){
       url: "/list",
       success: function(response){
         console.log("getList called");
+        console.log(response);
+        var list = response;
+        // for (var i = 0; i < response.length; i++) {
+          var $el = $('#listContainer').children().last();
+          $el.append("<div><p>" + list[0].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
+            // "<div class='listDiv' id='listDiv" + i +
+            //           "'<button class='deleteButton' id='deleteButton" + i +
+            //           "'>Delete</button><button class='completeButton' id='completeButton" + i +
+            //           "'>Complete</button></div"
+                    );
+        // }
       }// end success
     }); //end ajax
   } //end getList
 
-  //POST function to add new book
+  //POST function to add new list item
   $('#listForm').on('submit', function(event){
     event.preventDefault();
     console.log("submit listForm path");
     $.ajax({
       type: "POST",
-      url: "",
-      data: {title: $('#title').val(), author:$('#author').val(), publisher: $('#publisher').val(), year: $('#year').val()},
+      url: "list/newItem",
+      data: {title: $('#description').val()},
       success: function(response) {
         console.log("List item added");
         getList();
@@ -29,3 +40,18 @@ $(function(){
     //submitFormClear();
   });//end listForm click event
 });
+
+//delete button function
+function itemDelete(){
+  //on "click" statement to activate
+  //insert for loop to append item to DIV in getList
+  //insert DELETE ajax call
+  getList();
+}
+
+//item complete button
+function itemComplete(){
+  //on "click" statement
+  //for loop to add in getList
+  //change CSS here or in CSS file .toggle
+}
