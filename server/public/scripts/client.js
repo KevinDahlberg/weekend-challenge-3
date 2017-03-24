@@ -12,7 +12,7 @@ $(function(){
         console.log(response);
         var list = response;
         for (var i = 0; i < response.length; i++) {
-          var $el = $('#listContainer').children().last();
+          var $el = $('#listContainer').last();
           $el.append("<div><p>" + list[i].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
             // "<div class='listDiv' id='listDiv" + i +
             //           "'<button class='deleteButton' id='deleteButton" + i +
@@ -39,15 +39,18 @@ $(function(){
     });//end ajax
     //submitFormClear();
   });//end listForm click event
+
+  //delete button function
+  $("#listContainer").on('click', ".deleteButton", function(){
+    console.log("delete button clicked");
+    console.log($(this));
+    });
+    //on "click" statement to activate
+    //insert for loop to append item to DIV in getList
+    //insert DELETE ajax call
 });
 
-//delete button function
-function itemDelete(){
-  //on "click" statement to activate
-  //insert for loop to append item to DIV in getList
-  //insert DELETE ajax call
-  getList();
-}
+
 
 //item complete button
 function itemComplete(){
