@@ -59,7 +59,7 @@ router.post('/newItem', function(req, res){
 
 //DELETE function to delete from search database
 router.delete('/delete/:listId', function(req, res){
-  console.log("in the delete function: ", req.body);
+  console.log("in the delete function: ", req.params);
   var id = req.params.listId;
 pool.connect(function(errorConnectingToDatabase, client, done){
   if(errorConnectingToDatabase) {

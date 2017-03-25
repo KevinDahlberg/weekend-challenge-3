@@ -27,9 +27,12 @@ Additionally, please include some way to recreate your initial database schema. 
 - [x]MVP
   -  GET when DOM loads that pulls from DB
 - Sketch out functions needed in client.js
-  - create task (POST)
-  - each task should have a complete, and delete button (DELETE) (POST)
-  - task background changes upon completion (part of complete button call?)
+  - [x] create task (POST)
+  - [x] each task should have a complete, and delete button (DELETE) (POST)
+  - [x] task background changes upon completion (part of complete button call?)
+  - [x] add div to HTML to add table items to
+  - append to div with buttons in POST function
+  - test, make sure div posts with info from database
   - delete an object pulls it from the DOM and the DB
 - sketch out ajax in client.js and routes in app.js (create modules), alternate between the 2 for testing.
 - Wire frame DOM
