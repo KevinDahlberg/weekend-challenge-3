@@ -38,13 +38,14 @@ router.get('/', function(req, res){
 router.post('/newItem', function(req, res){
   console.log(req.body);
   var description = req.body.description;
+  var completed = req.body.completed;
   pool.connect(function(errorConnectingToDatabase, client, done){
     if(errorConnectingToDatabase) {
       console.log("Error connecting to DB");
       res.send(500);
     } else {
       console.log("connected");
-      client.query("INSERT INTO list (description) VALUES ($1);", [description], function(queryError, result){
+      client.query("INSERT INTO list (description, completed) VALUES ($1, $2);", [description, completed], function(queryError, result){
         done();
         if(queryError){
           console.log("Error making query.");
@@ -80,4 +81,27 @@ pool.connect(function(errorConnectingToDatabase, client, done){
 });
 });// end delete function
 
+//put function to update completed on list from false to true
+router.put('/completed', function(req, res){
+  console.log(req.body);
+  var completed = req.body.completed;
+  var i
+  pool.connect(function(errorConnectingToDatabase, client, done){
+    if(errorConnectingToDatabase) {
+      console.log("Error connecting to DB");
+      res.send(500);
+    } else {
+      console.log("connected");
+      client.query('UPDATE "list" SET "completed" = $1', [completed], function(queryError, result){
+        done();
+        if(queryError){
+          console.log("Error making query.");
+          res.send(500);
+        } else {
+          res.sendStatus(201);
+        }
+      });
+    }
+  });
+});
 module.exports = router;

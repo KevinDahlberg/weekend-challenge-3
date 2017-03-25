@@ -16,7 +16,8 @@ $(function(){
           var $el = $('#listContainer').children().last();
           console.log(list[i].id);
           console.log(list[i].description);
-          $el.append("<div id=div"+ list[i].id + " data-id='" + list[i].id + "'><p>" + list[i].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
+          console.log(list[i].completed);
+          $el.append("<div data-completed='"+ list[i].completed + "' data-id='" + list[i].id + "'><p>" + list[i].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
             // "<div class='listDiv' id='listDiv" + i +
             //           "'<button class='deleteButton' id='deleteButton" + i +
             //           "'>Delete</button><button class='completeButton' id='completeButton" + i +
@@ -34,7 +35,7 @@ $(function(){
     $.ajax({
       type: "POST",
       url: "list/newItem",
-      data: {description: $('#description').val()},
+      data: {description: $('#description').val(), completed: false},
       success: function(response) {
         console.log("List item added");
         getList();
@@ -57,19 +58,31 @@ $(function(){
         getList();
       }
     });//end ajax
+  });// end delete function
+
+    //on click put function in order to change a note to completed
+    $("#listContainer").on('click', ".completeButton", function(){
+      console.log("complete button clicked");
+      completed($(this).parent());
+      console.log($(this).parent().data('completed'));
     });
-    //on "click" statement to activate
-    //insert for loop to append item to DIV in getList
-    //insert DELETE ajax call
+
+
+
 }); // end Doc Ready
 
-
-
-//item complete button
-function itemComplete(){
-  //on "click" statement
-  //for loop to add in getList
-  //change CSS here or in CSS file .toggle
+//put function to change completed from false to true
+function completed(div){
+  console.log("in completed path");
+  console.log(div.data('completed'));
+  $.ajax({
+    type: "PUT",
+    url: "/list/completed",
+    data: {id: div.data('id'), description: div.data('description'), completed: true},
+    success: function (response){
+      getList();
+    }
+  });
 }
 
 function clearDom(){
