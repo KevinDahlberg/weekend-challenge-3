@@ -11,7 +11,7 @@ $(function(){
   });//end listForm click event
 
   //delete button function
-  $("#listContainer").on('click', ".deleteButton", function(){
+  $("#container").on('click', ".deleteButton", function(){
     console.log("delete button clicked");
     console.log($(this).parent().data('id'));
     var listId = $(this).parent().data('id');
@@ -38,14 +38,22 @@ function getList(){
       console.log("getList called");
       console.log(response);
       var list = response;
+      var $el;
       for (var i = 0; i < response.length; i++) {
-        var $el = $('#listContainer').children().last();
         console.log(list[i].id);
         console.log(list[i].description);
         console.log(list[i].completed);
-        $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
-        list[i].id + "'><p>" + list[i].description +
-        "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
+        if (list[i].completed === false){
+          $el = $('#listContainer').children().last();
+          $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
+          list[i].id + "'><p>" + list[i].description +
+          "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
+        } else {
+          $el = $('#completedContainer').children().last();
+          $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
+          list[i].id + "'><p>" + list[i].description +
+          "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
+        }// end if/else
       } //end for loop
     }// end success
   }); //end ajax
@@ -67,18 +75,18 @@ function completed(div){
 
 //confirmation popup box
 function deleteConfirm (listId) {
-  $("#container").append('<div id="deleteConfirm" title="Delete Confirmation"><p>Are you sure you want to delete this item?</p></div>');
-  $( "#deleteConfirm" ).dialog( {
+  $("#container").append('<div class="deleteConfirm" title="Delete Confirmation"><p>Are you sure you want to delete this item?</p></div>');
+  $( ".deleteConfirm" ).dialog( {
     resizable: false,
     height:140,
     modal: true,
     buttons: {
       Yes: function() {
-        $( this ).dialog( "close" );
+        $(".deleteConfirm").remove();
         deleteFromList(listId);
       },
       No : function() {
-        $( this ).dialog( "close" );
+        $(".deleteConfirm").remove();
       }
     }
   });
@@ -86,7 +94,8 @@ function deleteConfirm (listId) {
 
 //clears the DOM
 function clearDom(){
-  $("#listContainer").children().empty();
+  $("#listContainer").children().children().empty();
+  $("#completedContainer").children().children().empty();
 }
 
 //deletes from list db
