@@ -13,17 +13,10 @@ $(function(){
   //delete button function
   $("#listContainer").on('click', ".deleteButton", function(){
     console.log("delete button clicked");
-    deleteConfirm();
-    // var confirmDelete = confirm("Delete Note/nAre You Sure?");
-    // if (confirmDelete === true) {
-    //  console.log("You pressed OK!");
     console.log($(this).parent().data('id'));
     var listId = $(this).parent().data('id');
+    deleteConfirm(listId);
     console.log(listId);
-    deleteFromList(listId);
-    // } else {
-    //   console.log("You pressed Cancel!");
-    // }
   });// end delete function
 
   //on click put function in order to change a note to completed
@@ -72,26 +65,31 @@ function completed(div){
   });
 }
 
-function deleteConfirm () {
-  $('#deleteConfirm').dialog( {
+//confirmation popup box
+function deleteConfirm (listId) {
+  $("#container").append('<div id="deleteConfirm" title="Delete Confirmation"><p>Are you sure you want to delete this item?</p></div>');
+  $( "#deleteConfirm" ).dialog( {
     resizable: false,
     height:140,
     modal: true,
     buttons: {
-      "OK": function() {
+      Yes: function() {
         $( this ).dialog( "close" );
+        deleteFromList(listId);
       },
-      Cancel: function() {
+      No : function() {
         $( this ).dialog( "close" );
       }
     }
   });
 }
 
+//clears the DOM
 function clearDom(){
   $("#listContainer").children().empty();
 }
 
+//deletes from list db
 function deleteFromList(listId){
   $.ajax({
     type: "DELETE",
@@ -103,6 +101,7 @@ function deleteFromList(listId){
   });//end ajax
 }
 
+//function for that posts item to list on db
 function postToList(){
   $.ajax({
     type: "POST",
