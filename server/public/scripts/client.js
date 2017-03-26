@@ -7,6 +7,7 @@ $(function(){
     event.preventDefault();
     console.log("submit listForm path");
     postToList();
+    $('#description').val('');
     //submitFormClear();
   });//end listForm click event
 
