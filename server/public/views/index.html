@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Weekend Challenge 3</title>
-    <script type="text/javascript" src="vendors/jquery.js"></script>
-    <script type="text/javascript" src="scripts/client.js"></script>
-    <link type="text/css" rel="stylesheet" href="/styles/style.css">
-  </head>
-  <body>
-    <h1>To Do List</h1>
-    <form id="listForm">
+<head>
+  <meta charset="utf-8">
+  <title>Weekend Challenge 3</title>
+  <script type="text/javascript" src="vendors/jquery.js"></script>
+  <script type="text/javascript" src="vendors/jquery-ui.js"></script>
+  <script type="text/javascript" src="scripts/client.js"></script>
+  <link type="text/css" rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+  <h1>To Do List</h1>
+  <form id="listForm">
     <input type="text" placeholder="description" name="description" class="input" id="description">
     <button id="submit">Submit</button>
   </form>
   <div id="listContainer">
     <div><p>Test Div</p></div>
   </div> <!--end list container -->
-  </body>
+  <div id="deleteConfirm" title="Delete Confirmation">
+    <p>
+      <span class="ui-icon ui-icon-alert"
+      style="float: left; margin: 0 7px 20px 0;"></span>Would you like to delete this item?
+    </p>
+  </div>
+</body>
 </html>

@@ -6,46 +6,32 @@ $(function(){
   $('#listForm').on('submit', function(event){
     event.preventDefault();
     console.log("submit listForm path");
-    $.ajax({
-      type: "POST",
-      url: "list/newItem",
-      data: {description: $('#description').val(), completed: false},
-      success: function(response) {
-        console.log("List item added");
-        getList();
-      } //end success
-    });//end ajax
+    postToList();
     //submitFormClear();
   });//end listForm click event
 
   //delete button function
   $("#listContainer").on('click', ".deleteButton", function(){
     console.log("delete button clicked");
-    var confirmDelete = confirm("Delete Note/nAre You Sure?");
-    if (confirmDelete === true) {
-     console.log("You pressed OK!");
-     console.log($(this).parent().data('id'));
-     var listId = $(this).parent().data('id');
-     console.log(listId);
-     $.ajax({
-      type: "DELETE",
-      url: "list/delete/" + listId + "/",
-      success: function (){
-        console.log("in delete list path");
-        getList();
-      }
-    });//end ajax
-  } else {
-    console.log("You pressed Cancel!");
-  }
+    deleteConfirm();
+    // var confirmDelete = confirm("Delete Note/nAre You Sure?");
+    // if (confirmDelete === true) {
+    //  console.log("You pressed OK!");
+    console.log($(this).parent().data('id'));
+    var listId = $(this).parent().data('id');
+    console.log(listId);
+    deleteFromList(listId);
+    // } else {
+    //   console.log("You pressed Cancel!");
+    // }
   });// end delete function
 
-    //on click put function in order to change a note to completed
-    $("#listContainer").on('click', ".completeButton", function(){
-      console.log("complete button clicked");
-      completed($(this).parent());
-      console.log($(this).parent().data('completed'));
-    });
+  //on click put function in order to change a note to completed
+  $("#listContainer").on('click', ".completeButton", function(){
+    console.log("complete button clicked");
+    completed($(this).parent());
+    console.log($(this).parent().data('completed'));
+  });
 
 }); // end Doc Ready
 
@@ -64,13 +50,10 @@ function getList(){
         console.log(list[i].id);
         console.log(list[i].description);
         console.log(list[i].completed);
-        $el.append("<div data-completed='"+ list[i].completed + "' data-id='" + list[i].id + "'><p>" + list[i].description + "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>"
-          // "<div class='listDiv' id='listDiv" + i +
-          //           "'<button class='deleteButton' id='deleteButton" + i +
-          //           "'>Delete</button><button class='completeButton' id='completeButton" + i +
-          //           "'>Complete</button></div"
-                  );
-       } //end for loop
+        $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
+        list[i].id + "'><p>" + list[i].description +
+        "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
+      } //end for loop
     }// end success
   }); //end ajax
 } //end getList
@@ -89,6 +72,45 @@ function completed(div){
   });
 }
 
+function deleteConfirm () {
+  $('#deleteConfirm').dialog( {
+    resizable: false,
+    height:140,
+    modal: true,
+    buttons: {
+      "OK": function() {
+        $( this ).dialog( "close" );
+      },
+      Cancel: function() {
+        $( this ).dialog( "close" );
+      }
+    }
+  });
+}
+
 function clearDom(){
   $("#listContainer").children().empty();
+}
+
+function deleteFromList(listId){
+  $.ajax({
+    type: "DELETE",
+    url: "list/delete/" + listId + "/",
+    success: function (){
+      console.log("in delete list path");
+      getList();
+    }
+  });//end ajax
+}
+
+function postToList(){
+  $.ajax({
+    type: "POST",
+    url: "list/newItem",
+    data: {description: $('#description').val(), completed: false},
+    success: function(response) {
+      console.log("List item added");
+      getList();
+    } //end success
+  });//end ajax
 }
