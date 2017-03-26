@@ -85,14 +85,14 @@ pool.connect(function(errorConnectingToDatabase, client, done){
 router.put('/completed', function(req, res){
   console.log(req.body);
   var completed = req.body.completed;
-  var i
+  var id = req.body.id;
   pool.connect(function(errorConnectingToDatabase, client, done){
     if(errorConnectingToDatabase) {
       console.log("Error connecting to DB");
       res.send(500);
     } else {
       console.log("connected");
-      client.query('UPDATE "list" SET "completed" = $1', [completed], function(queryError, result){
+      client.query('UPDATE "list" SET "completed" = $2 WHERE "id" = $1', [id, completed], function(queryError, result){
         done();
         if(queryError){
           console.log("Error making query.");
