@@ -72,7 +72,7 @@ function completed(div){
       getList();
     }
   });
-}
+}// end put function
 
 //confirmation popup box
 function deleteConfirm (listId) {
@@ -95,13 +95,13 @@ function deleteConfirm (listId) {
       }
     }
   });
-}
+} // end confirmation window
 
 //clears the DOM
 function clearDom(){
   $("#listContainer").children().children().empty();
   $("#completedContainer").children().children().empty();
-}
+} // end clear DOM
 
 //deletes from list db
 function deleteFromList(listId){
@@ -113,7 +113,7 @@ function deleteFromList(listId){
       getList();
     }
   });//end ajax
-}
+} // end delete from list
 
 //function for that posts item to list on db
 function postToList(){
@@ -126,4 +126,4 @@ function postToList(){
       getList();
     } //end success
   });//end ajax
-}
+} // end post to list

@@ -12,8 +12,8 @@ var config = {
 
 var pool = new pg.Pool(config); //allows us to have more than one connection at a time
 
+//GET function that gets the list from the DB and sends it to the client side
 router.get('/', function(req, res){
-  // SELECT * From "list";
   pool.connect(function(errorConnectingToDatabase, client, done){
     if(errorConnectingToDatabase) {
       console.log("Error connecting to DB");
@@ -32,7 +32,7 @@ router.get('/', function(req, res){
       });
     }
   });
-});
+}); // end function
 
 //post function to add list item to database
 router.post('/newItem', function(req, res){
@@ -103,5 +103,6 @@ router.put('/completed', function(req, res){
       });
     }
   });
-});
+}); //end PUT function
+
 module.exports = router;
