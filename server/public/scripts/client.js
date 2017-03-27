@@ -46,13 +46,13 @@ function getList(){
         console.log(list[i].completed);
         if (list[i].completed === false){
           $el = $('#listContainer').children().last();
-          $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
-          list[i].id + "'><p>" + list[i].description +
+          $el.append("<div class='listItem' data-completed='"+ list[i].completed + "' data-id='" +
+          list[i].id + "'><p class='listText'>" + list[i].description +
           "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
         } else {
           $el = $('#completedContainer').children().last();
-          $el.append("<div data-completed='"+ list[i].completed + "' data-id='" +
-          list[i].id + "'><p>" + list[i].description +
+          $el.append("<div class='listItem' data-completed='"+ list[i].completed + "' data-id='" +
+          list[i].id + "'><p class='listText'>" + list[i].description +
           "</p><button class='deleteButton'>Delete</button><button class='completeButton'>Complete</button></div>");
         }// end if/else
       } //end for loop
@@ -76,11 +76,15 @@ function completed(div){
 
 //confirmation popup box
 function deleteConfirm (listId) {
-  $("#container").append('<div class="deleteConfirm" title="Delete Confirmation"><p>Are you sure you want to delete this item?</p></div>');
+  $("#container").append('<div class="deleteConfirm"><p>Are you sure you want to delete this item?</p></div>');
   $( ".deleteConfirm" ).dialog( {
     resizable: false,
     height:140,
     modal: true,
+    closeOnEscape: false,
+    open: function(event, ui) {
+    $(".ui-dialog-titlebar-close", ui.dialog | ui).hide()
+    },
     buttons: {
       Yes: function() {
         $(".deleteConfirm").remove();

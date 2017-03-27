@@ -32,25 +32,30 @@ Additionally, please include some way to recreate your initial database schema. 
   - [x] task background changes upon completion (part of complete button call?)
   - [x] add div to HTML to add table items to
   - append to div with buttons in POST function
-  - test, make sure div posts with info from database
-  - delete an object pulls it from the DOM and the DB
-- sketch out ajax in client.js and routes in app.js (create modules), alternate between the 2 for testing.
-- Wire frame DOM
-- Add GET, POST, PUT, and DELETE commands to ajax sketches
-- create SQL calls in DB
+    - [x] delete button
+    - [x] complete button
+      - updates database
+      - turns completed from false to true
+  - [x] test, make sure div posts with info from database
+  - [x] delete an object pulls it from the DOM and the DB
+- [x] sketch out ajax in client.js and routes in app.js (create modules), alternate between the 2 for testing.
+- [x] Add GET, POST, PUT, and DELETE commands to ajax sketches
+- [x] create SQL calls in DB
   - make sure you include some way to initiate DB scheme
-- add SQL calls to server side js, testing along the way
-- check flow from DOM to DB
+- [x] add SQL calls to server side js, testing along the way
+- [x] check flow from DOM to DB
+- [x] Complete DOM
 
 HARD MODE
 
 In whatever fashion you would like, create an 'are you sure: yes / no' option when deleting a task. Once again, you can interrupt this however you would like.
 
-- create yes/no option
+- [x] create yes/no option
+- [x] format dialog window in DOM
 - edit task (PUT)
 
 PRO MODE
 
 Adjust the logic so that completed tasks are brought to the bottom of the page, where the remaining tasks left to complete are brought to the top of the list.
 
-- move completed tasks to a "completed file" and show remaining tasks
+- [x] move completed tasks to a "completed file" and show remaining tasks
