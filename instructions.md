@@ -1,4 +1,4 @@
-#NPM INSTALL for modules, database recreation in database.sql
+# Instructions and Task List for Weekend Challenge 3
 
 Hello Primers!
 
@@ -23,8 +23,8 @@ We would recommend you spend some time thinking about how to approach this probl
 Additionally, please include some way to recreate your initial database schema. This can be a .sql file with CREATE TABLE statements or you can create your schema automatically when your app loads.
 
 **Tasks**
-- [x]Hook up all the moving parts
-- [x]MVP
+- [x] Hook up all the moving parts
+- [x] MVP
   -  GET when DOM loads that pulls from DB
 - Sketch out functions needed in client.js
   - [x] create task (POST)
